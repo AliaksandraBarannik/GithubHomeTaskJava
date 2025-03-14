@@ -13,8 +13,8 @@ public class UserFactory {
 
     public UserFactory() {
         this.user = User.builder()
-            .userName(EnvConfig.getUserName())
-            .password(EnvConfig.getPassword())
+            .userName(new EnvConfig().getUserName())
+            .password(new EnvConfig().getPassword())
             .build();
     }
 }

@@ -12,12 +12,12 @@ public class RepositoryTest extends BaseTest{
     private NewRepositoryActions newRepositoryActions;
 
     @BeforeClass
-    public void setup() {
+    public void setupRepositoryTest() {
         repositoryActions = new RepositoryActions(driver);
         newRepositoryActions = new NewRepositoryActions(driver);
     }
 
-    @Test
+    @Test(groups = {"sanity"})
     public void checkRepositoryCreationTest() {
         Repository repository = Repository.builder().name(dataUtils.generateRandomString()).build();
         newRepositoryActions.createNewRepository(repository);

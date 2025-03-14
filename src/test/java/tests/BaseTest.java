@@ -1,6 +1,7 @@
 package tests;
 
 import actions.HeaderActions;
+import config.EnvConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,19 +15,16 @@ public class BaseTest {
     protected WebDriver driver;
     protected HeaderActions headerActions;
     protected DataUtils dataUtils;
-
-    public BaseTest() {
-
-    }
-
+protected EnvConfig envConfig;
 
     @BeforeClass
     public void setup() {
-        // Initialize the WebDriverManager and ChromeDriver
+        envConfig = new EnvConfig();
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");  // Optional: start browser maximized
         driver = new ChromeDriver(options);
+        driver.get(envConfig.getBaseUrl());
         headerActions = new HeaderActions(driver);
         dataUtils = new DataUtils();
     }

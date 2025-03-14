@@ -5,30 +5,27 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class EnvConfig {
-    private static Properties properties;
+    private Properties properties;
 
-    // Load properties from the file when the class is loaded
-    static {
-        try {
+    public EnvConfig() {
+        try (FileInputStream inputStream = new FileInputStream("src/test/java/resources/env.properties")) {
             properties = new Properties();
-            FileInputStream inputStream = new FileInputStream("src/test/resources/env.properties");
             properties.load(inputStream);
-            inputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Unable to load env.properties file");
+            throw new RuntimeException("Unable to load env.properties file", e);
         }
     }
 
-    public static String getBaseUrl() {
+    public String getBaseUrl() {
         return properties.getProperty("baseUrl");
     }
 
-    public static String getUserName() {
+    public String getUserName() {
         return properties.getProperty("userName");
     }
 
-    public static String getPassword() {
+    public String getPassword() {
         return properties.getProperty("password");
     }
 }
